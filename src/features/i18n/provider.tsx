@@ -18,7 +18,7 @@ export async function dynamicActivate(locale: SupportedLocale, setLoading: (v: b
     const catalog = await import(`../../locales/${locale}.js`)
     // Bundlers will either export it as default or as a named export named default.
     i18n.load(locale, catalog.messages || catalog.default.messages)
-  } catch (error) {
+  } catch (_err: unknown) {
     // console.error(error)
   }
   i18n.activate(locale)
