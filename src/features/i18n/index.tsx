@@ -1,9 +1,10 @@
-import React, { ReactNode, useCallback } from 'react'
+import { ReactNode, useCallback } from 'react'
+
+import { SupportedLocale } from '@/app/i18n/constants'
+import { setUserLocale } from '@/app/i18n/store'
+import { useTypedDispatch, useTypedSelector } from '@/app/store'
 
 import { Provider } from './provider'
-import { useTypedDispatch, useTypedSelector } from 'app/store'
-import { SupportedLocale } from 'app/i18n/constants'
-import { setUserLocale } from 'app/i18n/store'
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const dispatch = useTypedDispatch()

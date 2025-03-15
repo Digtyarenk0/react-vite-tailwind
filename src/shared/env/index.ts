@@ -20,7 +20,9 @@ if (IS_DEVELOPMENT) {
     } else if (REACT_APP_ENVIRONMENT_STORAGE !== ENV.REACT_APP_ENVIRONMENT) {
       ENV.REACT_APP_ENVIRONMENT = REACT_APP_ENVIRONMENT_STORAGE
       toast.info(
-        `REACT_APP_ENVIRONMENT was changed from "${import.meta.env.REACT_APP_ENVIRONMENT}" to "${ENV.REACT_APP_ENVIRONMENT}"`
+        `REACT_APP_ENVIRONMENT was changed from "${import.meta.env.REACT_APP_ENVIRONMENT}" to "${
+          ENV.REACT_APP_ENVIRONMENT
+        }"`
       )
     }
   }

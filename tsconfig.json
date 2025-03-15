@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
     "target": "esnext",
     "lib": [
       "dom",
@@ -22,11 +27,12 @@
     "types": [
       "vite/client",
       "vitest/globals",
+      "vite-plugin-svgr/client",
       "@testing-library/jest-dom"
     ],
   },
   "include": [
-    "src"
+    "src",
   ],
   "exclude": [
     "node_modules"

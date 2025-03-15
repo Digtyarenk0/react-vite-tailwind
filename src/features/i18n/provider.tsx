@@ -1,9 +1,9 @@
+import { ReactNode, useEffect, useState } from 'react'
 import { i18n } from '@lingui/core'
 import { I18nProvider } from '@lingui/react'
 import { en, PluralCategory } from 'make-plural/plurals'
 
-import { DEFAULT_LOCALE, SupportedLocale } from '../../app/i18n/constants'
-import { ReactNode, useEffect, useState } from 'react'
+import { DEFAULT_LOCALE, SupportedLocale } from '@/app/i18n/constants'
 
 type LocalePlural = Record<SupportedLocale, (n: number, ordinal?: boolean) => PluralCategory>
 
@@ -18,7 +18,7 @@ export async function dynamicActivate(locale: SupportedLocale, setLoading: (v: b
     const catalog = await import(`../../locales/${locale}.js`)
     // Bundlers will either export it as default or as a named export named default.
     i18n.load(locale, catalog.messages || catalog.default.messages)
-  } catch (error) {
+  } catch (_err: unknown) {
     // console.error(error)
   }
   i18n.activate(locale)
