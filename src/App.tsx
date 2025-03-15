@@ -1,9 +1,9 @@
 import { Suspense } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
-import { ErrorBoundary } from '@/widgets/error-boundary'
-import { APP_ROUTES } from '@/shared/constants/routes'
 import MainPage from '@/pages/main/ui/page'
+import { APP_ROUTES } from '@/shared/constants/routes'
+import { ErrorBoundary } from '@/widgets/error-boundary'
 
 const App = () => {
   return (

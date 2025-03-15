@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { enableMapSet } from 'immer'
+
 import { i18nSlice } from '../i18n/store'
 
 enableMapSet()

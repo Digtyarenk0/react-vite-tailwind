@@ -1,9 +1,9 @@
-import { DEFAULT_LOCALE, SupportedLocale } from '@/app/i18n/constants'
+import { ReactNode, useEffect, useState } from 'react'
 import { i18n } from '@lingui/core'
 import { I18nProvider } from '@lingui/react'
 import { en, PluralCategory } from 'make-plural/plurals'
 
-import { ReactNode, useEffect, useState } from 'react'
+import { DEFAULT_LOCALE, SupportedLocale } from '@/app/i18n/constants'
 
 type LocalePlural = Record<SupportedLocale, (n: number, ordinal?: boolean) => PluralCategory>
 
