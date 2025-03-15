@@ -2,7 +2,7 @@ import { Trans } from '@lingui/react/macro'
 import React, { Component, ReactNode } from 'react'
 
 import cls from './error-boundary.module.scss'
-import { IS_DEVELOPMENT_ENVIRONMENT } from 'shared/env'
+import { IS_DEVELOPMENT_ENVIRONMENT } from '@/shared/env'
 
 const errorMessageDynamicImport = 'Failed to fetch dynamically imported module:'
 

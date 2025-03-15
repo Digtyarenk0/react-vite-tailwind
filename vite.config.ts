@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { lingui } from '@lingui/vite-plugin'
+import svgr from 'vite-plugin-svgr'
 
 const plugins = [
   [
@@ -19,6 +20,7 @@ const plugins = [
       ]
     }),
     lingui(),
+    svgr(),
     tsconfigPaths()
   ]
 ]
