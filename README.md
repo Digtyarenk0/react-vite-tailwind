@@ -15,11 +15,18 @@ This project uses many tools like:
 - [Eslint](https://eslint.org)
 - [Prettier](https://prettier.io)
 
+## Env setup
+
+A description of the required variables is available in .env.example
+
+```bash
+# In development can overwrite localstorage env
+REACT_APP_ENVIRONMENT= # development/production.
+```
+
 ## Getting Started
 
 ### Install
-
-Create the project.
 
 Install dependencies.
 
@@ -30,37 +37,37 @@ yarn install
 Serve with hot reload at <http://localhost:5173>.
 
 ```bash
-yarn run dev
+yarn start
 ```
 
 ### Lint
 
 ```bash
-pnpm run lint
+yarn lint
 ```
 
 ### Typecheck
 
 ```bash
-pnpm run typecheck
+yarn typecheck
 ```
 
 ### Build
 
 ```bash
-pnpm run build
+yarn build
 ```
 
 ### Test
 
 ```bash
-pnpm run test
+yarn test
 ```
 
 View and interact with your tests via UI.
 
 ```bash
-pnpm run test:ui
+yarn test:ui
 ```
 
 ## License
