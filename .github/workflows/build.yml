@@ -46,12 +46,12 @@ jobs:
           cp dist/bundle-report.html public/bundle-report/index.html
 
       - name: Deploy bundle report to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GH_PAGES_PAT }}
-          publish_dir: ./public
-          destination_dir: bundle-report
-          keep_files: true # don`t delete old files
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          yarn deploy
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAGES_PAT }}
 
       - name: Comment PR with Report Link
         uses: thollander/actions-comment-pull-request@v2

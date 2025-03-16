@@ -1,5 +1,6 @@
 {
   "name": "react-vite-tailwindcss",
+  "homepage": "https://github.com/Digtyarenk0/react-vite-tailwind/",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -12,6 +13,7 @@
     "analyze": "vite build",
     "build": "tsc && vite build",
     "serve": "vite preview",
+    "deploy": "gh-pages -d dist",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "lint": "eslint src --max-warnings=0",
@@ -56,6 +58,7 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-tailwindcss": "^3.18.0",
+    "gh-pages": "^6.3.0",
     "happy-dom": "^15.11.7",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.0",
