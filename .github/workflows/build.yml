@@ -1,14 +1,31 @@
-name: Build and Bundle Analysis
+name: CI Pipeline
 
 on:
   pull_request:
     branches:
-      - main # Main branch
+      - main
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run linting
+        run: yarn lint:fix # Eslint
+
   build:
     runs-on: ubuntu-latest
-
+    needs: lint # Await linting
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -29,25 +46,30 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile # install deps
-
-      - name: Eslint update
-        run: yarn lint:fix # eslint format
+        run: yarn install --frozen-lockfile
 
       - name: Run build
-        run: |
-          yarn build
-          if [ $? -eq 0 ]; then
-            echo "Build completed successfully"
-          else
-            echo "Build failed"
-            exit 1
-          fi
+        run: yarn build
+
+  analyze:
+    runs-on: ubuntu-latest
+    needs: build # awaiting build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
       - name: Analyze bundle size
-        run: yarn analyze
+        run: yarn analyze # analize script
         env:
-          CI: true # it`s CI/CD runtime
+          CI: true # CI/CD runtime flag
 
       - name: Upload bundle report (optional)
         uses: actions/upload-artifact@v4
