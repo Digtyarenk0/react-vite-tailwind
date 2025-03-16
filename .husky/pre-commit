@@ -3,4 +3,3 @@
 
 yarn lint-staged
 git add .
-yarn build
