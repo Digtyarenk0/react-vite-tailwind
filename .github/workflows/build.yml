@@ -56,5 +56,5 @@ jobs:
       - name: Comment PR with Report Link
         uses: thollander/actions-comment-pull-request@v2
         with:
-          message: "📊 [Bundle Report](https://your-username.github.io/your-repo/bundle-report/) is available!"
+          message: "📊 [Bundle Report](https://github.com/Digtyarenk0/react-vite-tailwind/bundle-report/) is available!"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
