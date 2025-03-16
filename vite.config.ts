@@ -24,7 +24,9 @@ const plugins = [
     svgr(),
     tsconfigPaths(),
     analyzer({
-      openAnalyzer: false // for CI/CD
+      openAnalyzer: false, // for CI/CD,
+      analyzerMode: 'static', // generate statice repost file
+      fileName: 'bundle-report'
     })
   ]
 ]

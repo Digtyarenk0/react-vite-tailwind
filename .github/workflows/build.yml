@@ -71,8 +71,8 @@ jobs:
         env:
           CI: true # CI/CD runtime flag
 
-      - name: Upload bundle report (optional)
+      - name: Upload bundle report
         uses: actions/upload-artifact@v4
         with:
           name: bundle-report
-          path: dist
+          path: dist/bundle-report.html
