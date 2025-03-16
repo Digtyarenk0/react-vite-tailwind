@@ -1,4 +1,4 @@
-name: Build Check
+name: Build and Bundle Analysis
 
 on:
   pull_request:
@@ -18,8 +18,18 @@ jobs:
         with:
           node-version: "20" # node -v
 
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.yarn
+            node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
       - name: Install dependencies
-        run: yarn install # install deps
+        run: yarn install --frozen-lockfile # install deps
 
       - name: Eslint update
         run: yarn lint:fix # eslint format
@@ -33,3 +43,14 @@ jobs:
             echo "Build failed"
             exit 1
           fi
+
+      - name: Analyze bundle size
+        run: yarn analyze
+        env:
+          CI: true # it`s CI/CD runtime
+
+      - name: Upload bundle report (optional)
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-report
+          path: dist
