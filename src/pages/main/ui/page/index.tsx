@@ -10,6 +10,8 @@ const MainPage = () => {
             </p>
           </div>
           <div className="my-10">
+
+
             <a
               href="vscode://"
               className="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2"
