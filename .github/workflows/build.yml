@@ -1,0 +1,35 @@
+name: Build Check
+
+on:
+  pull_request:
+    branches:
+      - main # Main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20" # node -v
+
+      - name: Install dependencies
+        run: yarn install # install deps
+
+      - name: Eslint update
+        run: yarn lint:fix # eslint format
+
+      - name: Run build
+        run: |
+          yarn build
+          if [ $? -eq 0 ]; then
+            echo "Build completed successfully"
+          else
+            echo "Build failed"
+            exit 1
+          fi
