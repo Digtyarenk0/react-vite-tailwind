@@ -1,31 +1,14 @@
-name: CI Pipeline
+name: CI Build Analyze
 
 on:
   pull_request:
-    branches:
+    branches: # start flow if PR in {} branche
+      - master
+      - develop
       - main
-
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Run linting
-        run: yarn lint:fix # Eslint
-
   build:
     runs-on: ubuntu-latest
-    needs: lint # Await linting
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -48,31 +31,30 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Run build
+      - name: Run linting
+        run: yarn lint:fix # Eslint
+
+      - name: Run build and analyze
         run: yarn build
-
-  analyze:
-    runs-on: ubuntu-latest
-    needs: build # awaiting build
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Analyze bundle size
-        run: yarn analyze # analize script
         env:
           CI: true # CI/CD runtime flag
 
-      - name: Upload bundle report
-        uses: actions/upload-artifact@v4
+      # Copy build report to deploy folder
+      - name: Prepare bundle report
+        run: |
+          mkdir -p public/bundle-report
+          cp dist/bundle-report.html public/bundle-report/index.html
+
+      - name: Deploy bundle report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: bundle-report
-          path: dist/bundle-report.html
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          destination_dir: bundle-report
+          keep_files: true # don`t delete old files
+
+      - name: Comment PR with Report Link
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: "📊 [Bundle Report](https://your-username.github.io/your-repo/bundle-report/) is available!"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
