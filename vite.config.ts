@@ -36,9 +36,16 @@ export default defineConfig(() => {
   return {
     base: '/',
     server: {
-      port: 3000
+      port: 5173
     },
     plugins,
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler' // or 'modern'
+        }
+      }
+    },
     test: {
       globals: true,
       environment: 'happy-dom',
