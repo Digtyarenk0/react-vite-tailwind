@@ -48,7 +48,7 @@ jobs:
       - name: Deploy bundle report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_PAGES_PAT }}
           publish_dir: ./public
           destination_dir: bundle-report
           keep_files: true # don`t delete old files
